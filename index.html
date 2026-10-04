@@ -1,60 +1,113 @@
 <!doctype html>
 <html lang="ru">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#ffffff">
-    <meta name="description" content="Портал поставщиков — поиск действующих договоров для вашей закупки.">
-    <title>Портал поставщиков</title>
-    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-    <link rel="preload" href="assets/fonts/vk-sans-display-medium.woff" as="font" type="font/woff" crossorigin>
-    <link rel="preload" href="assets/fonts/vk-sans-display-regular.woff" as="font" type="font/woff" crossorigin>
-    <link rel="stylesheet" href="assets/portal.css?v=20261004-1">
-    <script src="assets/portal.js?v=20261004-1" defer></script>
-  </head>
-  <body>
-    <a class="skip-link" href="#purchase-query">Перейти к поиску</a>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="Найдите поставщика, проверьте условия договора и узнайте, как оформить закупку.">
+  <title>Портал поставщиков</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/fonts/vk-sans-display-medium.woff" as="font" type="font/woff" crossorigin>
+  <link rel="preload" href="assets/fonts/vk-sans-display-regular.woff" as="font" type="font/woff" crossorigin>
+  <link rel="stylesheet" href="assets/portal.css?v=20261004-2">
+  <script src="assets/catalog.js?v=20261004-2" defer></script>
+  <script src="assets/portal.js?v=20261004-2" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#purchase-query">Перейти к поиску</a>
+  <header class="header">
+    <div class="container header__inner">
+      <a class="brand" href="./" id="home-link" aria-label="Портал поставщиков — главная">
+        <svg width="36" height="36" viewBox="0 0 36 36" fill="none" aria-hidden="true"><rect width="36" height="36" rx="10" fill="currentColor"/><path d="M11.5 25V11.5H24.5V25M17.5 25V17.5H24.5" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>Портал поставщиков</span>
+      </a>
+      <span class="demo-badge" title="Договоры, суммы и контакты в прототипе вымышлены">Демоверсия</span>
+    </div>
+  </header>
 
-    <header class="header">
-      <div class="container header__inner">
-        <a class="brand" href="./" aria-label="Портал поставщиков — главная">
-          <svg class="brand__icon" width="36" height="36" viewBox="0 0 36 36" fill="none" aria-hidden="true">
-            <rect width="36" height="36" rx="10" fill="currentColor"/>
-            <path d="M11.5 25V11.5H24.5V25M17.5 25V17.5H24.5" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          <span>Портал поставщиков</span>
-        </a>
+  <main id="main">
+    <section class="search-section container" aria-labelledby="page-title">
+      <div class="hero-copy">
+        <h1 id="page-title">Найдите поставщика.<br><span>Начните закупку.</span></h1>
+        <p class="hero-description">Договоры, контакты и порядок действий — в одном поиске.</p>
       </div>
-    </header>
+      <form id="search-form" class="search-form" role="search" novalidate>
+        <label class="visually-hidden" for="purchase-query">Что нужно закупить?</label>
+        <div class="search-field" id="search-field">
+          <svg class="search-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.75" cy="10.75" r="6.75" stroke="currentColor" stroke-width="1.8"/><path d="m16 16 4.5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          <input id="purchase-query" name="query" type="search" placeholder="Что нужно закупить?" maxlength="180" autocomplete="off" enterkeyhint="search" aria-describedby="search-hint search-feedback">
+          <button class="icon-button clear-button" id="clear-query" type="button" aria-label="Очистить поиск" hidden><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m6 6 8 8M14 6l-8 8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
+          <button class="button button--primary search-button" id="search-button" type="submit"><span class="spinner" id="search-spinner" aria-hidden="true" hidden></span><span id="button-label">Найти</span></button>
+        </div>
+        <p class="search-hint" id="search-hint">Введите товар, услугу или поставщика. Проверьте условия договора и следуйте подсказкам.</p>
+        <p class="search-feedback" id="search-feedback" role="status" aria-live="polite" aria-atomic="true"></p>
+      </form>
+      <div class="suggestions" id="suggestions" aria-label="Примеры запросов">
+        <span>Например</span>
+        <button type="button" data-query="Сувенирная продукция">Сувенирная продукция <span aria-hidden="true">↗</span></button>
+        <button type="button" data-query="Полиграфия">Полиграфия <span aria-hidden="true">↗</span></button>
+        <button type="button" data-query="Ноутбуки">Ноутбуки <span aria-hidden="true">↗</span></button>
+      </div>
+      <noscript><p class="noscript-note">Чтобы воспользоваться поиском, включите JavaScript в браузере.</p></noscript>
+    </section>
 
-    <main class="container main">
-      <section class="search-section" aria-labelledby="page-title">
-        <h1 id="page-title">Найдите договор<br><span>для вашей закупки</span></h1>
-        <p class="description" id="search-description">Введите, что вам нужно приобрести. Портал покажет действующие договоры, поставщиков, доступный лимит и срок действия, а также подскажет дальнейшие шаги</p>
-
-        <form class="search-form" id="search-form" role="search" novalidate>
-          <label class="visually-hidden" for="purchase-query">Что вы хотите приобрести?</label>
-          <div class="search-field" id="search-field">
-            <svg class="search-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <circle cx="10.75" cy="10.75" r="6.75" stroke="currentColor" stroke-width="1.8"/>
-              <path d="m16 16 4.5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-            </svg>
-            <input id="purchase-query" name="query" type="search" placeholder="Что вы хотите приобрести?" maxlength="240" autocomplete="off" enterkeyhint="search" aria-describedby="search-description search-feedback" spellcheck="false">
-            <button class="clear-button" id="clear-query" type="button" aria-label="Очистить поиск" hidden>
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-                <path d="m6 6 8 8M14 6l-8 8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-              </svg>
-            </button>
-            <button class="search-button" id="search-button" type="submit">
-              <span class="spinner" aria-hidden="true" hidden></span>
-              <span id="button-label">Найти</span>
-            </button>
+    <div class="results container" id="results" hidden>
+      <section class="results-section" aria-labelledby="results-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow" id="category-label"></p>
+            <h2 id="results-title" tabindex="-1"></h2>
           </div>
-          <p class="search-feedback" id="search-feedback" role="status" aria-live="polite" aria-atomic="true"></p>
-        </form>
-
-        <noscript><p class="noscript-note">Чтобы воспользоваться поиском, включите JavaScript в браузере.</p></noscript>
+          <button class="button button--secondary pool-button" id="open-pool" type="button">Пул поставщиков <span aria-hidden="true">↗</span></button>
+        </div>
+        <div id="found-content">
+          <div class="table-toolbar">
+            <div class="segmented-control" role="group" aria-label="Показать договоры">
+              <button type="button" id="filter-all" aria-pressed="true">Все договоры</button>
+              <button type="button" id="filter-safe" aria-pressed="false">Без предупреждений</button>
+            </div>
+            <label class="sort-control"><span class="visually-hidden">Порядок договоров</span><select id="sort-order"><option value="relevance">По соответствию</option><option value="limit">По доступному лимиту</option><option value="expiry">По сроку действия</option></select></label>
+          </div>
+          <p class="table-hint">Выберите договор, чтобы подготовить задачу на оформление заказа.</p>
+          <div class="table-shell" id="table-shell" role="region" aria-label="Действующие договоры. Таблицу можно прокручивать по горизонтали." tabindex="0">
+            <table class="contracts-table">
+              <caption class="visually-hidden">Действующие договоры по вашему запросу</caption>
+              <colgroup><col class="col-subject"><col class="col-supplier"><col class="col-price"><col class="col-limit"><col class="col-expiry"><col class="col-contact"></colgroup>
+              <thead><tr><th scope="col">Предмет договора</th><th scope="col">Поставщик</th><th scope="col" class="number-cell">Предельная цена</th><th scope="col" class="number-cell">Доступный лимит</th><th scope="col">Действует до</th><th scope="col">Контакт поставщика</th></tr></thead>
+              <tbody id="contracts-body"></tbody>
+            </table>
+          </div>
+          <div class="filter-empty" id="filter-empty" hidden><h3>Все найденные договоры требуют внимания</h3><p>Посмотрите доступные договоры и уточните условия у закупщика.</p><button class="text-button" id="reset-filter" type="button">Показать все договоры</button></div>
+          <div class="table-footer">
+            <p class="warning-legend"><span class="warning-dot" aria-hidden="true"></span>Красным: остаток менее 20% или до окончания менее 3 месяцев</p>
+            <div class="pagination" id="pagination" hidden><button class="icon-button" id="previous-page" type="button" aria-label="Предыдущая страница">←</button><span id="page-label"></span><button class="icon-button" id="next-page" type="button" aria-label="Следующая страница">→</button></div>
+          </div>
+        </div>
+        <div class="empty-state" id="empty-state" hidden>
+          <div class="empty-icon" aria-hidden="true"><svg width="32" height="32" viewBox="0 0 24 24" fill="none"><circle cx="10.75" cy="10.75" r="6.75" stroke="currentColor" stroke-width="1.6"/><path d="m16 16 4.5 4.5M8 10.75h5.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+          <div><h3>Готового договора пока нет</h3><p>Попробуйте другое название товара или услуги. Если договор не найдётся, закупщик поможет выбрать поставщика и определить порядок закупки.</p><button class="text-button" id="change-query" type="button">Уточнить запрос <span aria-hidden="true">↗</span></button></div>
+        </div>
       </section>
-    </main>
-  </body>
+
+      <section class="next-steps" aria-labelledby="steps-title">
+        <div class="section-heading steps-heading"><div><p class="eyebrow">Следующий шаг</p><h2 id="steps-title">Как оформить закупку</h2></div><span class="steps-caption" id="steps-caption">По действующему договору</span></div>
+        <div class="selected-contract" id="selected-contract" hidden></div>
+        <div class="guidance-grid">
+          <div class="steps-card">
+            <ol class="steps-list" id="steps-list"></ol>
+            <div class="steps-action"><button class="button button--primary" id="create-task" type="button">Создать задачу в Jira <span aria-hidden="true">↗</span></button><span id="task-hint">На оформление заказа к договору</span></div>
+          </div>
+          <aside class="support-card" aria-labelledby="support-title"><h3 id="support-title">К кому обратиться</h3><div id="support-contacts"></div></aside>
+        </div>
+      </section>
+      <p class="data-note" id="data-note"></p>
+    </div>
+  </main>
+
+  <dialog class="dialog" id="portal-dialog" aria-labelledby="dialog-title">
+    <div class="dialog-header"><h2 id="dialog-title"></h2><button class="icon-button" id="close-dialog" type="button" aria-label="Закрыть окно"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="m6 6 10 10M16 6 6 16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></div>
+    <div id="dialog-content"></div>
+  </dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+</body>
 </html>
