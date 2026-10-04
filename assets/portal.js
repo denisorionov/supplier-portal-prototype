@@ -99,7 +99,7 @@
     $("empty-state").hidden = count > 0;
     if (count) renderTable();
     renderGuidance();
-    $("data-note").textContent = `Демонстрационные данные на ${longDate.format(new Date(`${asOf}T00:00:00Z`))}. Поставщики, договоры, суммы и контакты вымышлены.`;
+    $("data-note").textContent = `Демонстрационные данные на ${longDate.format(new Date(`${asOf}T00:00:00Z`))} Поставщики, договоры, суммы и контакты вымышлены.`;
   }
   function renderTable() {
     const filtered = C.filterAndSort(state.matches, state.filter, state.order, asOf);

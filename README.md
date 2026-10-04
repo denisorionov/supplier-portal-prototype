@@ -41,3 +41,7 @@
 Публикация: GitHub Pages, корень ветки `main`. Сборка и установка зависимостей не требуются.
 
 Проверки: `node --test tests/catalog.test.cjs` и `node --check assets/portal.js`.
+
+## Превью главного экрана
+
+![Главный экран](docs/portal-preview-1791118734260.jpg)
