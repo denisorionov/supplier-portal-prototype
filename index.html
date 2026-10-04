@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Портал поставщиков — демонстрационный прототип</title>
+  <meta name="description" content="Демонстрационный прототип внутреннего портала для поиска договоров, поставщиков и дальнейших шагов по закупке." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar__inner">
+      <a class="brand" href="#top" aria-label="Портал поставщиков">
+        <span class="brand__mark">П</span>
+        <span>Портал поставщиков</span>
+      </a>
+      <nav class="nav">
+        <a href="#how">Как это работает</a>
+        <a href="#demo">Пример поиска</a>
+        <a href="#help">Помощь</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero__orb hero__orb--one"></div>
+      <div class="hero__orb hero__orb--two"></div>
+      <div class="container hero__content">
+        <div class="eyebrow">Внутренний сервис для сотрудников</div>
+        <h1>Найдите договор, поставщика и порядок действий за пару минут</h1>
+        <p class="hero__lead">Введите, что вам нужно приобрести. Портал покажет действующие договоры, доступный лимит, срок действия и подскажет, что делать дальше.</p>
+
+        <div class="search-shell" id="demo">
+          <form id="searchForm" class="search" autocomplete="off">
+            <span class="search__icon" aria-hidden="true">⌕</span>
+            <input id="searchInput" type="text" placeholder="Например: сувенирная продукция" aria-label="Поиск по закупке" />
+            <button class="button button--primary" type="submit">Найти</button>
+          </form>
+          <p class="search-help">Ищите по товару, услуге или ключевому слову.</p>
+          <div class="chips" aria-label="Примеры запросов">
+            <button class="chip" data-query="Сувенирная продукция">Сувенирная продукция</button>
+            <button class="chip" data-query="Полиграфия">Полиграфия</button>
+            <button class="chip" data-query="Организация мероприятий">Организация мероприятий</button>
+            <button class="chip" data-query="Подарочные наборы">Подарочные наборы</button>
+            <button class="chip chip--secondary" data-query="Нестандартное оборудование">Нестандартное оборудование</button>
+          </div>
+        </div>
+
+        <div class="hero__caption">Демонстрационный прототип: все данные ниже вымышлены и используются только для визуализации концепции.</div>
+      </div>
+    </section>
+
+    <section id="resultsSection" class="results-section hidden" aria-live="polite">
+      <div class="container">
+        <div id="loadingState" class="loading-card hidden">
+          <div class="spinner"></div>
+          <div>
+            <div class="loading-card__title">Ищем подходящие договоры</div>
+            <div class="loading-card__text">Проверяем предмет, срок действия и доступный лимит</div>
+          </div>
+        </div>
+
+        <div id="foundState" class="state hidden">
+          <div class="section-head">
+            <div>
+              <div class="eyebrow eyebrow--blue">Результат поиска</div>
+              <h2>Найдено 3 действующих договора</h2>
+              <p>Запрос: <strong id="foundQuery">Сувенирная продукция</strong></p>
+            </div>
+            <span class="status-pill status-pill--success">3 договора</span>
+          </div>
+
+          <div class="contract-grid">
+            <article class="contract-card">
+              <div class="contract-card__top">
+                <span class="status-pill status-pill--success">Действует</span>
+                <span class="contract-card__id">Договор № SU-1042</span>
+              </div>
+              <h3>Корпоративные сувениры и брендированная продукция</h3>
+              <p class="supplier">ООО «БрендФабрика»</p>
+              <div class="metrics">
+                <div class="metric"><span class="metric__label">Предельная цена</span><strong>12 000 000 ₽</strong></div>
+                <div class="metric"><span class="metric__label">Доступный лимит</span><strong>7 450 000 ₽</strong></div>
+                <div class="metric"><span class="metric__label">Срок действия</span><strong>до 31.12.2027</strong></div>
+              </div>
+              <div class="contact-line">
+                <div class="avatar">АС</div>
+                <div><span>Контакт поставщика</span><strong>Анна Смирнова</strong><a href="mailto:brand@demo.ru">brand@demo.ru</a></div>
+              </div>
+              <button class="button button--ghost full-width select-contract" data-contract="Корпоративные сувениры и брендированная продукция">Выбрать договор</button>
+            </article>
+
+            <article class="contract-card contract-card--warning">
+              <div class="contract-card__top">
+                <span class="status-pill status-pill--success">Действует</span>
+                <span class="contract-card__id">Договор № SU-1187</span>
+              </div>
+              <h3>Подарочные наборы и welcome kits</h3>
+              <p class="supplier">ООО «ПромоПак»</p>
+              <div class="alert-badge">Остаток лимита менее 20%</div>
+              <div class="metrics">
+                <div class="metric"><span class="metric__label">Предельная цена</span><strong>8 000 000 ₽</strong></div>
+                <div class="metric metric--danger"><span class="metric__label">Доступный лимит</span><strong>1 050 000 ₽</strong></div>
+                <div class="metric"><span class="metric__label">Срок действия</span><strong>до 15.01.2027</strong></div>
+              </div>
+              <div class="contact-line">
+                <div class="avatar">ИП</div>
+                <div><span>Контакт поставщика</span><strong>Иван Петров</strong><a href="mailto:sales@promopak-demo.ru">sales@promopak-demo.ru</a></div>
+              </div>
+              <button class="button button--ghost full-width select-contract" data-contract="Подарочные наборы и welcome kits">Выбрать договор</button>
+            </article>
+
+            <article class="contract-card contract-card--warning">
+              <div class="contract-card__top">
+                <span class="status-pill status-pill--success">Действует</span>
+                <span class="contract-card__id">Договор № SU-1210</span>
+              </div>
+              <h3>Сувенирная продукция для мероприятий и конференций</h3>
+              <p class="supplier">ООО «МерчЛайн»</p>
+              <div class="alert-badge">Срок действия скоро заканчивается</div>
+              <div class="metrics">
+                <div class="metric"><span class="metric__label">Предельная цена</span><strong>5 500 000 ₽</strong></div>
+                <div class="metric"><span class="metric__label">Доступный лимит</span><strong>3 200 000 ₽</strong></div>
+                <div class="metric metric--danger"><span class="metric__label">Срок действия</span><strong>до 30.11.2026</strong></div>
+              </div>
+              <div class="contact-line">
+                <div class="avatar">МВ</div>
+                <div><span>Контакт поставщика</span><strong>Мария Волкова</strong><a href="mailto:info@merchline-demo.ru">info@merchline-demo.ru</a></div>
+              </div>
+              <button class="button button--ghost full-width select-contract" data-contract="Сувенирная продукция для мероприятий и конференций">Выбрать договор</button>
+            </article>
+          </div>
+
+          <section class="next-steps" id="how">
+            <div class="next-steps__intro">
+              <span class="eyebrow eyebrow--blue">Что делать дальше</span>
+              <h2>Договор найден — можно переходить к оформлению</h2>
+              <p>Мы убрали закупочный язык и оставили только те шаги, которые нужны сотруднику.</p>
+            </div>
+            <ol class="steps-list">
+              <li><span>1</span><div><strong>Выберите подходящий договор</strong><p>Сверьте предмет договора, срок действия и доступный лимит.</p></div></li>
+              <li><span>2</span><div><strong>Свяжитесь с поставщиком</strong><p>Обсудите состав заказа, стоимость и сроки.</p></div></li>
+              <li><span>3</span><div><strong>Создайте задачу на оформление закупки</strong><p>После согласования условий передайте данные на оформление.</p></div></li>
+              <li><span>4</span><div><strong>Если сомневаетесь — напишите закупщику</strong><p>Он поможет выбрать договор и проверить порядок действий.</p></div></li>
+            </ol>
+            <div class="actions-row">
+              <button class="button button--primary open-task">Создать задачу</button>
+              <button class="button button--secondary open-contact">Связаться с закупщиком</button>
+              <button class="text-button" id="detailsButton">Посмотреть подробную инструкцию</button>
+            </div>
+          </section>
+        </div>
+
+        <div id="notFoundState" class="state hidden">
+          <div class="no-result-hero">
+            <div class="no-result-icon">?</div>
+            <div>
+              <div class="eyebrow eyebrow--blue">Результат поиска</div>
+              <h2>Подходящий договор не найден</h2>
+              <p>По запросу <strong id="notFoundQuery">«Нестандартное оборудование»</strong> нет подходящего действующего договора. Выберите дальнейший вариант в зависимости от суммы закупки.</p>
+            </div>
+          </div>
+
+          <div class="route-grid">
+            <article class="route-card route-card--blue">
+              <div class="route-card__amount">до 1,5 млн ₽</div>
+              <h3>Можно провести малую закупку самостоятельно</h3>
+              <ol>
+                <li>Запросите коммерческие предложения минимум у <strong>трёх поставщиков</strong>.</li>
+                <li>Сравните предложения и выберите исполнителя с <strong>наименьшей ценой</strong> при соблюдении ваших требований.</li>
+                <li>После выбора поставщика создайте задачу на оформление малой закупки.</li>
+                <li>В отдельных случаях возможна <strong>оплата по счёту без отдельного договора</strong>.</li>
+              </ol>
+              <p class="note">Конкретный способ оформления зависит от предмета закупки и внутренних требований.</p>
+              <button class="button button--primary open-task">Создать задачу на малую закупку</button>
+            </article>
+
+            <article class="route-card route-card--violet">
+              <div class="route-card__amount">свыше 1,5 млн ₽</div>
+              <h3>Обратитесь к категориальному закупщику</h3>
+              <p>Закупщик поможет определить способ проведения закупки и дальнейшие шаги.</p>
+              <div class="person-card compact">
+                <div class="avatar avatar--large">ЕМ</div>
+                <div>
+                  <a class="person-link" href="#" data-profile>Екатерина Морозова</a>
+                  <span>Категорийный менеджер</span>
+                  <a href="mailto:e.morozova@company-demo.ru">e.morozova@company-demo.ru</a>
+                </div>
+              </div>
+              <div class="stacked-actions">
+                <button class="button button--primary open-contact">Связаться с закупщиком</button>
+                <button class="button button--secondary open-task">Создать задачу</button>
+              </div>
+            </article>
+          </div>
+
+          <div class="help-banner">
+            <div><strong>Не знаете, какой вариант выбрать?</strong><p>Напишите закупщику — он поможет определить дальнейший порядок действий.</p></div>
+            <button class="button button--secondary open-contact">Получить помощь</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="help" class="support-section">
+      <div class="container">
+        <div class="support-card">
+          <div>
+            <div class="eyebrow eyebrow--blue">Помощь</div>
+            <h2>Нужна помощь?</h2>
+            <p>Если вы не уверены, какой договор выбрать или как провести закупку, обратитесь к ответственному закупщику.</p>
+          </div>
+          <div class="person-card">
+            <div class="avatar avatar--large">ЕМ</div>
+            <div>
+              <a class="person-link" href="#" data-profile>Екатерина Морозова</a>
+              <span>Категорийный менеджер</span>
+              <a href="mailto:e.morozova@company-demo.ru">e.morozova@company-demo.ru</a>
+              <span>+7 (495) 555-44-21</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="value-section">
+      <div class="container">
+        <div class="section-head section-head--center"><div><div class="eyebrow eyebrow--blue">Ценность</div><h2>Что даёт Портал поставщиков</h2></div></div>
+        <div class="value-grid">
+          <article><div class="value-icon">⌕</div><h3>Быстрый поиск</h3><p>Договоры и поставщики находятся по простому запросу.</p></article>
+          <article><div class="value-icon">₽</div><h3>Контроль лимитов</h3><p>Сотрудник сразу видит, можно ли использовать действующий договор.</p></article>
+          <article><div class="value-icon">→</div><h3>Понятные действия</h3><p>Портал объясняет дальнейшие шаги простым языком.</p></article>
+          <article><div class="value-icon">✓</div><h3>Меньше ручных запросов</h3><p>Базовую информацию не нужно каждый раз уточнять у закупочной команды.</p></article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer__inner">
+      <span>Портал поставщиков</span>
+      <span>Демонстрационный прототип. Данные и сценарии приведены для визуализации концепции.</span>
+    </div>
+  </footer>
+
+  <div id="modalBackdrop" class="modal-backdrop hidden" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modal__close" id="modalClose" aria-label="Закрыть">×</button>
+      <div id="modalIcon" class="modal__icon">→</div>
+      <h3 id="modalTitle">Переход в систему создания задач</h3>
+      <p id="modalText">В рабочей версии здесь будет открываться форма создания задачи.</p>
+      <button class="button button--primary" id="modalAction">Понятно</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
